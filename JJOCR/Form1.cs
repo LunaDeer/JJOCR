@@ -91,14 +91,18 @@ namespace Ocr
             string root = System.IO.Path.GetDirectoryName(System.Windows.Forms.Application.ExecutablePath);
             string modelPathroot = root + @"\inference";
             //检测模型
-            config.det_infer = modelPathroot + @"\ch_PP-OCRv3_det_infer";
+            config.det_infer = modelPathroot + @"\ch_PP-OCRv4_det_infer";
+            //文字识别模型
+            config.rec_infer = modelPathroot + @"\ch_PP-OCRv4_rec_infer";
             //方向模型
             config.cls_infer = modelPathroot + @"\ch_ppocr_mobile_v2.0_cls_infer";
-            //文字识别模型
-            config.rec_infer = modelPathroot + @"\ch_PP-OCRv3_rec_infer";
+
             config.keys = modelPathroot + @"\ppocr_keys.txt";
             oCRParameter = new OCRParameter();
+            oCRParameter.use_gpu = true;
+            //oCRParameter.gpu_id = 1;
             oCRParameter.enable_mkldnn = false;
+            //oCRParameter.det_db_score_mode = false;
             engine = new PaddleOCREngine(config, oCRParameter);
 
         }
